@@ -4,3 +4,6 @@ obj
 
 # mstest test results
 TestResults
+/AdvancedMultithreadingLab/_ReSharper.AdvancedMultithreadingLab
+/packages
+*.suo

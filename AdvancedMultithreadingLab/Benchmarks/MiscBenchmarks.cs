@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
-namespace BenchmarkThreadSync
+namespace AdvancedMultithreadingLab.Benchmarks
 {
-    class Program
+    class MiscBenchmarks
     {
         static readonly object sync = new object();
         static volatile int volatileField = 0;
          
-        static void Main(string[] args)
+        public static void ExecuteAll()
         {
             foreach (int i in new[] { 1, 2, 6 })
             {
@@ -83,12 +80,17 @@ namespace BenchmarkThreadSync
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < n; i++)
             {
-                new object();
+                new AllocClass();
             }
             GC.WaitForFullGCComplete();
             stopwatch.Stop();
 
             WriteTime(name, n, stopwatch.ElapsedTicks);
+        }
+
+        class AllocClass
+        {
+            private object a, b, c, d;
         }
 
         private static void TestInterlocked(string name)
