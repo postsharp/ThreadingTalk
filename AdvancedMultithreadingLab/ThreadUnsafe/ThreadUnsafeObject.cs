@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using PostSharp.Toolkit.Threading.Dispatching;
+using PostSharp.Toolkit.Threading;
 
 namespace AdvancedMultithreadingLab.ThreadUnsafe
 {
-    [ThreadUnsafeClass]
+    [ThreadUnsafeObject]
     class ThreadUnsafeObject
     {
         readonly List<int> list = new List<int>();

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.postsharp.org/1.0/configuration">
+  <Using File="default" />
+  <Using File="..\packages\PostSharp.Toolkit.Threading.2.1.1.12\tools\PostSharp.Toolkit.Threading.Weaver.dll" />
+  <Tasks>
+    <XmlMulticast />
+  </Tasks>
+  <Data Name="XmlMulticast">
+  </Data>
+</Project>
