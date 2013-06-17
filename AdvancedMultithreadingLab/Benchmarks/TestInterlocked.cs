@@ -21,7 +21,7 @@ namespace AdvancedMultithreadingLab.Benchmarks
 
         public void Start()
         {
-            for (int i = 0; i < Environment.ProcessorCount; i++)
+            for (int i = -1; i < Environment.ProcessorCount; i++)
             {
                 for ( int j = 0; j < Environment.ProcessorCount; j++ )
                 {
@@ -58,7 +58,9 @@ namespace AdvancedMultithreadingLab.Benchmarks
 
         private void ThreadMain(object state)
         {
-            SetThreadAffinityMask( GetCurrentThread(), (IntPtr) (1 << (int) state) );
+            int processorId = (int) state;
+            if (processorId < 0) return;
+            SetThreadAffinityMask( GetCurrentThread(), (IntPtr) (1 << processorId) );
             
             // If the new thread affinity mask does not specify the processor 
             // that is currently running the thread, the thread is rescheduled on one of the allowable processors.

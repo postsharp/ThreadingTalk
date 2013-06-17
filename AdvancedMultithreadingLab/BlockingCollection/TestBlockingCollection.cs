@@ -17,7 +17,7 @@ namespace AdvancedMultithreadingLab.BlockingCollection
     internal class TestBlockingCollection
     {
         private const int n = 2000000;
-        private readonly BlockingCollection<int> stack = new BlockingCollection<int>();
+        private readonly BlockingCollection<int> collection = new BlockingCollection<int>();
 
         public void Start()
         {
@@ -42,9 +42,9 @@ namespace AdvancedMultithreadingLab.BlockingCollection
         {
             for ( int i = 0; i < n; i++ )
             {
-                this.stack.Add( i );
+                this.collection.Add( i );
             }
-            this.stack.CompleteAdding();
+            this.collection.CompleteAdding();
         }
 
         private void ThreadPop()
@@ -52,7 +52,7 @@ namespace AdvancedMultithreadingLab.BlockingCollection
             for ( int i = 0; i < n; )
             {
                 int value;
-                if ( this.stack.TryTake( out value ) )
+                if ( this.collection.TryTake( out value ) )
                     i++;
             }
         }

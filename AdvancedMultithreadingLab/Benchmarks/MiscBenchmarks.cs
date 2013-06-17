@@ -203,7 +203,7 @@ namespace AdvancedMultithreadingLab.Benchmarks
             }
             stopwatch.Stop();
 
-            WriteTime("Set Event", n, stopwatch.ElapsedTicks);
+            WriteTime("Set Event", n*2, stopwatch.ElapsedTicks);
 
         }
 

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab.Actor
 {
-    internal sealed class AdderActor : PostSharp.Toolkit.Threading.Actor
+    internal sealed class AdderActor : PostSharp.Patterns.Threading.Actor
     {
         private int count;
 
