@@ -3,10 +3,8 @@ using PostSharp.Patterns.Threading;
 
 namespace AdvancedMultithreadingLab.ReaderWriterLock
 {
-    [ReaderWriterSynchronized]
     class SynchronizedOrder : IOrder
     {
-        [WriterLock]
         public void Set(int amount, int discount)
         {
             if (amount < discount) throw new InvalidOperationException();
@@ -20,7 +18,7 @@ namespace AdvancedMultithreadingLab.ReaderWriterLock
 
         public int AmountAfterDiscount
         {
-            [ReaderLock] get { return this.Amount - this.Discount; }
+            get { return this.Amount - this.Discount; }
         }
     }
 }

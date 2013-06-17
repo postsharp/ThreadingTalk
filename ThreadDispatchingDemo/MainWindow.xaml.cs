@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PostSharp.Patterns.Threading;
 
 namespace ThreadDispatchingDemo
 {
@@ -31,7 +30,6 @@ namespace ThreadDispatchingDemo
             this.DoStuff();
         }
 
-        [Background]
         private void DoStuff()
         {
             Random random = new Random();
@@ -47,13 +45,11 @@ namespace ThreadDispatchingDemo
             this.EnableControls( true );
         }
 
-        [Dispatched(true)]
         private void SetProgress( int progress )
         {
             this.progressBar.Value = progress;
         }
 
-        [Dispatched(true)]
         private void EnableControls( bool enabled )
         {
             this.startButton.IsEnabled = enabled;
