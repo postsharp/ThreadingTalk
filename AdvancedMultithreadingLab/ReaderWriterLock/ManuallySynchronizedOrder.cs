@@ -24,9 +24,9 @@ namespace AdvancedMultithreadingLab.ReaderWriterLock
         {
             get
             {
-                this.@lock.EnterWriteLock();
+                this.@lock.EnterReadLock();
                 int result = this.Amount - this.Discount;
-                this.@lock.ExitWriteLock();
+                this.@lock.ExitReadLock();
                 return result;
 
             }

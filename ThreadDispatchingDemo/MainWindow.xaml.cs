@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PostSharp.Patterns.Threading;
 
 namespace ThreadDispatchingDemo
 {
@@ -32,6 +34,7 @@ namespace ThreadDispatchingDemo
 
         private void DoStuff()
         {
+            ThreadPool.QueueUserWorkItem( state => { 
             Random random = new Random();
             for ( int i = 0; i < 100; i++ )
             {
@@ -40,19 +43,28 @@ namespace ThreadDispatchingDemo
                     Math.Sin( random.NextDouble() );
                 }
                 this.SetProgress( i );
+
             }
 
             this.EnableControls( true );
-        }
+        });
+    }
 
-        private void SetProgress( int progress )
-        {
-            this.progressBar.Value = progress;
-        }
+         private void SetProgress( int progress )
+         {
+             this.Dispatcher.BeginInvoke( new Action( () =>
+                                                          {
+                                                              this.progressBar.Value = progress;
+                                                          } ) );
+         }
 
+        [Dispatched]
         private void EnableControls( bool enabled )
         {
-            this.startButton.IsEnabled = enabled;
+            this.Dispatcher.BeginInvoke( new Action( () =>
+                                                         {
+                                                             this.startButton.IsEnabled = enabled;
+                                                         } ));
         }
     }
 }

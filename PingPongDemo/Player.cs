@@ -7,7 +7,7 @@ namespace TestAsync
 {
     class Player : Actor
     {
-        string name;
+        readonly string name;
         private int counter;
 
         public Player(string name)
