@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using PostSharp.Toolkit.Threading;
+using PostSharp.Patterns.Threading;
 
 namespace TestAsync
 {
@@ -32,7 +32,7 @@ namespace TestAsync
             this.counter++;
         }
 
-        [ThreadSafe]
+        [ExplicitlySynchronized]
         public override string ToString()
         {
             return this.name;
