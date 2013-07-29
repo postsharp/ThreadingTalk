@@ -1,9 +1,10 @@
-#region Copyright (c) 2012 by SharpCrafters s.r.o.
+#region Copyright (c) 2004-2010 by SharpCrafters s.r.o.
 
-// Copyright (c) 2012, SharpCrafters s.r.o.
-// All rights reserved.
+// This file is part of PostSharp source code and is the property of SharpCrafters s.r.o.
 // 
-// For licensing terms, see file License.txt
+// Source code is provided to customers under strict non-disclosure agreement (NDA). 
+// YOU MUST HAVE READ THE NDA BEFORE HAVING RECEIVED ACCESS TO THIS SOURCE CODE. 
+// Severe financial penalties apply in case of non respect of the NDA.
 
 #endregion
 
@@ -30,12 +31,19 @@ namespace AdvancedMultithreadingLab.Actor
 
             stopwatch.Start();
 
-            for ( int i = 0; i < n; i++ )
+            for ( int i = 0; i < Environment.ProcessorCount; i++ )
             {
-                foreach ( AdderActor actor in this.actors )
-                {
-                    actor.Add( 1 );
-                }
+                Thread t = new Thread( () =>
+                                           {
+                                               for ( int j = 0; j < n/Environment.ProcessorCount; j++ )
+                                               {
+                                                   foreach ( AdderActor actor in this.actors )
+                                                   {
+                                                       actor.Add( 1 );
+                                                   }
+                                               }
+                                           } );
+                t.Start();
             }
 
             CountdownEvent countdownEvent = new CountdownEvent( this.actors.Length );

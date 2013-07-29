@@ -8,11 +8,16 @@ namespace TestAsync
     class Player : Actor
     {
         readonly string name;
-        private int counter;
+        readonly Random random = new Random();
+        private readonly double skills;
 
-        public Player(string name)
+        private int counter;
+        
+
+        public Player(string name, double skills )
         {
             this.name = name;
+            this.skills = skills;
         }
 
         public async Task<int> GetCounter()
@@ -20,16 +25,19 @@ namespace TestAsync
             return this.counter;
         }
 
-        public async Task Ping(Player peer, int countdown)
+        public async Task<Player> Ping( Player peer, string color )
         {
-            Console.WriteLine("{0}.Ping({1}) from thread {2}", this.name, countdown, Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine("{0}.Ping( color={1} ) from thread {2}", this.name, color, Thread.CurrentThread.ManagedThreadId);
 
-            if (countdown > 1)
+            if ( random.NextDouble() <= skills )
             {
-                await peer.Ping(this, countdown - 1);
+                this.counter++;
+                return await peer.Ping(this, color);
             }
-
-            this.counter++;
+            else
+            {
+                return peer;
+            }
         }
 
         [ExplicitlySynchronized]
