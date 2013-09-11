@@ -59,6 +59,11 @@
     <Compile Include="Actor\AdderActor.cs" />
     <Compile Include="Benchmarks\MiscBenchmarks.cs" />
     <Compile Include="Benchmarks\TestInterlocked.cs" />
+    <Compile Include="Freezable\FreezableAttribute.cs" />
+    <Compile Include="Freezable\Freezer.cs" />
+    <Compile Include="Freezable\Icecream.cs" />
+    <Compile Include="Freezable\IFreezable.cs" />
+    <Compile Include="Freezable\Ingredient.cs" />
     <Compile Include="ReaderWriterLock\IOrder.cs" />
     <Compile Include="ReaderWriterLock\ManuallySynchronizedOrder.cs" />
     <Compile Include="ReaderWriterLock\SynchronizedOrder.cs" />
