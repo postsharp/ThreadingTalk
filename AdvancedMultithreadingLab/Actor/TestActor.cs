@@ -16,7 +16,7 @@ namespace AdvancedMultithreadingLab.Actor
 {
     internal sealed class TestActor
     {
-        private const int n = 10000;
+        private const int n = 100000;
 
         private readonly AdderActor[] actors = new AdderActor[500];
 
@@ -24,6 +24,7 @@ namespace AdvancedMultithreadingLab.Actor
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
+            // Create all actors.
             for ( int i = 0; i < this.actors.Length; i++ )
             {
                 this.actors[i] = new AdderActor();
@@ -31,9 +32,12 @@ namespace AdvancedMultithreadingLab.Actor
 
             stopwatch.Start();
 
+
+            // Feed actors with work items from each core.
+            Thread[] threads = new Thread[Environment.ProcessorCount];
             for ( int i = 0; i < Environment.ProcessorCount; i++ )
             {
-                Thread t = new Thread( () =>
+                threads[i] = new Thread( () =>
                                            {
                                                for ( int j = 0; j < n/Environment.ProcessorCount; j++ )
                                                {
@@ -43,9 +47,16 @@ namespace AdvancedMultithreadingLab.Actor
                                                    }
                                                }
                                            } );
-                t.Start();
+                threads[i].Start();
             }
 
+            // Wait until we've enqueued all accesses.
+            foreach ( Thread thread in threads )
+            {
+                thread.Join();
+            }
+
+            // Wait until all actors processed their queue.
             CountdownEvent countdownEvent = new CountdownEvent( this.actors.Length );
             for ( int i = 0; i < this.actors.Length; i++ )
             {
@@ -54,6 +65,7 @@ namespace AdvancedMultithreadingLab.Actor
             countdownEvent.Wait();
 
 
+            // Write performance metrics.
             Console.WriteLine( "Actor: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*this.actors.Length*Stopwatch.Frequency/stopwatch.ElapsedTicks,
                                1e9/((double) n*this.actors.Length*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
         }

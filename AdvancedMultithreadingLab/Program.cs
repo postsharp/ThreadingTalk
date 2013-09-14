@@ -26,8 +26,8 @@ namespace AdvancedMultithreadingLab
 
             //MiscBenchmarks.ExecuteAll();
             //new TestConcurrentStack().Start();
-            //new TestRingBuffer().Start();
-            //new TestBlockingCollection().Start();
+            new TestRingBuffer().Start();
+            new TestBlockingCollection().Start();
             //new TestThreadUnsafeObject().Start();
             new TestActor().Start();
             //new TestInterlocked().Start();

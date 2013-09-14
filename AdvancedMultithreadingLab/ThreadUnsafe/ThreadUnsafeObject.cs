@@ -14,14 +14,7 @@ namespace AdvancedMultithreadingLab.ThreadUnsafe
 
         public void Add(int x)
         {
-#if DEBUG
-            if ( !Monitor.TryEnter(this))
-                throw new Exception();
-#endif
             this.list.Add( x );
-#if DEBUG
-            Monitor.Exit(this);
-#endif
         }
     }
 }

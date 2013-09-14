@@ -26,7 +26,8 @@ namespace AdvancedMultithreadingLab.Freezable
             // TODO: Freeze "owned" objects. We could use reflection or have an ownership aspect system.
         }
 
-        [OnLocationSetValueAdvice, MulticastPointcut(Targets = MulticastTargets.Field, Attributes = MulticastAttributes.Instance)]
+        [OnLocationSetValueAdvice, 
+         MulticastPointcut(Targets = MulticastTargets.Field, Attributes = MulticastAttributes.Instance)]
         public void OnSetField( LocationInterceptionArgs args )
         {
             if ( this.IsFrozen )

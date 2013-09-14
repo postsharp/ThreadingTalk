@@ -49,11 +49,9 @@ namespace AdvancedMultithreadingLab.BlockingCollection
 
         private void ThreadPop()
         {
-            for ( int i = 0; i < n; )
+            foreach (int i in this.collection.GetConsumingEnumerable())
             {
-                int value;
-                if ( this.collection.TryTake( out value ) )
-                    i++;
+
             }
         }
     }
