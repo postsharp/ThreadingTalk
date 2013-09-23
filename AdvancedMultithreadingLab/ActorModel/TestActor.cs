@@ -12,7 +12,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace AdvancedMultithreadingLab.Actor
+namespace AdvancedMultithreadingLab.ActorModel
 {
     internal sealed class TestActor
     {

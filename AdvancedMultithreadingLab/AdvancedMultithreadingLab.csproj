@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor\AdderActor.cs" />
+    <Compile Include="ActorModel\AdderActor.cs" />
     <Compile Include="Benchmarks\MiscBenchmarks.cs" />
     <Compile Include="Benchmarks\TestInterlocked.cs" />
     <Compile Include="Freezable\FreezableAttribute.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="ThreadUnsafe\TestThreadUnsafeObject.cs" />
     <Compile Include="ThreadUnsafe\ThreadUnsafeObject.cs" />
     <Compile Include="TrivialConcurrentStack\ConcurrentStack.cs" />
-    <Compile Include="Actor\TestActor.cs" />
+    <Compile Include="ActorModel\TestActor.cs" />
     <Compile Include="BlockingCollection\TestBlockingCollection.cs" />
     <Compile Include="RingBuffer\TestRingBuffer.cs" />
     <Compile Include="RingBuffer\PaddedUInt32.cs" />

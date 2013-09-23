@@ -1,8 +1,9 @@
 ﻿using System;
-using PostSharp.Patterns.Threading;
 
 namespace AdvancedMultithreadingLab.ReaderWriterLock
 {
+    // TODO: Add custom attributes.
+
     class SynchronizedOrder : IOrder
     {
         public void Set(int amount, int discount)

@@ -9,10 +9,11 @@
 
 using System;
 using System.Threading;
+using PostSharp.Patterns.Threading;
 
-namespace AdvancedMultithreadingLab.Actor
+namespace AdvancedMultithreadingLab.ActorModel
 {
-    internal sealed class AdderActor : PostSharp.Patterns.Threading.Actor
+    internal sealed class AdderActor : Actor
     {
         private int count;
 
