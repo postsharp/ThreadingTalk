@@ -9,6 +9,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TestAsync
@@ -22,18 +24,30 @@ namespace TestAsync
 
         private static async Task AsyncMain()
         {
-            Player sarkozy = new Player( "Sarkozy", 0.9 );
-            Player hollande = new Player( "Hollande", 0.8 );
+            // Create a logger;
+            ConsoleLogger consoleLogger = new ConsoleLogger();
 
-            Task<Player> game1 = sarkozy.Ping( hollande, "blue" );
-            Task<Player> game2 = hollande.Ping( sarkozy, "red" );
+            // Create two players.
+            Player sarkozy = new Player( consoleLogger,  "Sarkozy", 0.95 );
+            Player hollande = new Player( consoleLogger,  "Hollande", 0.9 );
 
-            Player game1Winner = await game1;
-            Player gamer2Winner = await game2;
+            // Start several concurrent games between players.
+            ConsoleColor[] colors = new[] { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow,ConsoleColor.Red,  };
+            Task<Player>[] games = colors.Select( color => sarkozy.Ping( hollande, color ) ).ToArray();
 
-            Console.WriteLine( "Game1 winner = {0}, Game2 winner ={1}", game1Winner, gamer2Winner );
-            Console.WriteLine( "{0} totally received {1} balls", sarkozy, await sarkozy.GetCounter() );
-            Console.WriteLine( "{0} totally received {1} balls", hollande, await hollande.GetCounter());
+            await Task.WhenAll( games );
+
+        
+            consoleLogger.WriteLine("We are all done");
+            foreach ( Task<Player> game in games )
+            {
+                consoleLogger.WriteLine(string.Format( "Winner: {0}", game.Result));
+            }
+
+            consoleLogger.WriteLine( string.Format( "{0} totally received {1} balls", sarkozy, await sarkozy.GetCounter()));
+            consoleLogger.WriteLine( string.Format( "{0} totally received {1} balls", hollande, await hollande.GetCounter()));
+
+            await consoleLogger.Flush();
         }
     }
 }

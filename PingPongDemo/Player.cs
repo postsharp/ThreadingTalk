@@ -7,6 +7,7 @@ namespace TestAsync
 {
     class Player : Actor
     {
+        private readonly ConsoleLogger logger;
         readonly string name;
         readonly Random random = new Random();
         private readonly double skills;
@@ -14,8 +15,9 @@ namespace TestAsync
         private int counter;
         
 
-        public Player(string name, double skills )
+        public Player( ConsoleLogger logger, string name, double skills )
         {
+            this.logger = logger;
             this.name = name;
             this.skills = skills;
         }
@@ -25,9 +27,10 @@ namespace TestAsync
             return this.counter;
         }
 
-        public async Task<Player> Ping( Player peer, string color )
+        public async Task<Player> Ping( Player peer, ConsoleColor color )
         {
-            Console.WriteLine("{0}.Ping( color={1} ) from thread {2}", this.name, color, Thread.CurrentThread.ManagedThreadId);
+            Console.ForegroundColor = color;
+            this.logger.WriteLine( string.Format( "{0}.Ping( color={1} ) from thread {2}", this.name, color, Thread.CurrentThread.ManagedThreadId), color);
 
             if ( random.NextDouble() <= skills )
             {
