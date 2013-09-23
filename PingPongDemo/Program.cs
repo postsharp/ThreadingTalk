@@ -35,10 +35,12 @@ namespace TestAsync
             ConsoleColor[] colors = new[] { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow,ConsoleColor.Red,  };
             Task<Player>[] games = colors.Select( color => sarkozy.Ping( hollande, color ) ).ToArray();
 
+            // Wait for all games to finish.
             await Task.WhenAll( games );
-
-        
             consoleLogger.WriteLine("We are all done");
+            
+
+            // Display winner and stats.
             foreach ( Task<Player> game in games )
             {
                 consoleLogger.WriteLine(string.Format( "Winner: {0}", game.Result));
@@ -47,6 +49,8 @@ namespace TestAsync
             consoleLogger.WriteLine( string.Format( "{0} totally received {1} balls", sarkozy, await sarkozy.GetCounter()));
             consoleLogger.WriteLine( string.Format( "{0} totally received {1} balls", hollande, await hollande.GetCounter()));
 
+
+            // Wait for the console logger.
             await consoleLogger.Flush();
         }
     }
