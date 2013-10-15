@@ -7,7 +7,8 @@ using PostSharp.Patterns.Threading;
 namespace AdvancedMultithreadingLab.ThreadUnsafe
 {
 
-    [ThreadUnsafe]
+    // TODO: Add ThreadUnsafe
+
     class ThreadUnsafeObject
     {
         readonly List<int> list = new List<int>();

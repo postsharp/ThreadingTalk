@@ -12,9 +12,6 @@ namespace AdvancedMultithreadingLab.Freezable
 
         public void AddIngredient( Ingredient ingredient, double volume )
         {
-            if ( this.IsFrozen )
-                throw new InvalidOperationException();
-
             double currentIngredientVolume;
             this.composition.TryGetValue( ingredient, out currentIngredientVolume );
             this.TotalVolume += volume;
