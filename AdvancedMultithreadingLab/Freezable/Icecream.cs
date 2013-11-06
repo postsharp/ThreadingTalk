@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AdvancedMultithreadingLab.Freezable
 {
-    class Icecream : IFreezable
+    class Icecream 
     {
         private readonly Dictionary<Ingredient, double> composition = new Dictionary<Ingredient, double>();
 
@@ -18,20 +18,6 @@ namespace AdvancedMultithreadingLab.Freezable
             this.composition[ingredient] = currentIngredientVolume + volume;
         }
 
-
-        #region Implementation of IFreezable
-        public bool CanFreeze { get { return !this.IsFrozen; } }
-        public bool IsFrozen { get; private set; }
-
-
-        public void Freeze()
-        {
-            if ( !this.CanFreeze )
-                throw new InvalidOperationException();
-
-            this.IsFrozen = true;
-        }
-        #endregion
 
     }
 }
