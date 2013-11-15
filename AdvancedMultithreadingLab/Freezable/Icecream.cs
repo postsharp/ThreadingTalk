@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace AdvancedMultithreadingLab.Freezable
 {
+    [Freezable]
     class Icecream 
     {
         private readonly Dictionary<Ingredient, double> composition = new Dictionary<Ingredient, double>();

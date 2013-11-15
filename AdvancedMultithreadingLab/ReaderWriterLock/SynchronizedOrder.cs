@@ -1,11 +1,13 @@
 ﻿using System;
+using PostSharp.Patterns.Threading;
 
 namespace AdvancedMultithreadingLab.ReaderWriterLock
 {
-    // TODO: Add custom attributes.
-
+    
+    [ReaderWriterSynchronized]
     class SynchronizedOrder : IOrder
     {
+        [WriterLock]
         public void Set(int amount, int discount)
         {
             if (amount < discount) throw new InvalidOperationException();
@@ -19,7 +21,7 @@ namespace AdvancedMultithreadingLab.ReaderWriterLock
 
         public int AmountAfterDiscount
         {
-            get { return this.Amount - this.Discount; }
+            [ReaderLock] get { return this.Amount - this.Discount; }
         }
     }
 }

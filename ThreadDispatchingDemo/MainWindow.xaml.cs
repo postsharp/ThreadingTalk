@@ -32,39 +32,34 @@ namespace ThreadDispatchingDemo
             this.DoStuff();
         }
 
+        [Background]
         private void DoStuff()
         {
-            ThreadPool.QueueUserWorkItem( state => { 
-            Random random = new Random();
-            for ( int i = 0; i < 100; i++ )
-            {
-                for ( int j = 0; j < 1000000; j++ )
-                {
-                    Math.Sin( random.NextDouble() );
-                }
-                this.SetProgress( i );
+                     Random random = new Random();
+                    for ( int i = 0; i < 100; i++ )
+                    {
+                        for ( int j = 0; j < 1000000; j++ )
+                        {
+                            Math.Sin( random.NextDouble() );
+                        }
+                        this.SetProgress( i );
 
-            }
+                    }
 
-            this.EnableControls( true );
-        });
+                    this.EnableControls( true );
     }
 
+         [Dispatched]
          private void SetProgress( int progress )
          {
-             this.Dispatcher.BeginInvoke( new Action( () =>
-                                                          {
                                                               this.progressBar.Value = progress;
-                                                          } ) );
          }
 
         [Dispatched]
         private void EnableControls( bool enabled )
         {
-            this.Dispatcher.BeginInvoke( new Action( () =>
-                                                         {
+      
                                                              this.startButton.IsEnabled = enabled;
-                                                         } ));
         }
     }
 }

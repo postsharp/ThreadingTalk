@@ -7,11 +7,11 @@ using PostSharp.Patterns.Threading;
 namespace AdvancedMultithreadingLab.ThreadUnsafe
 {
 
-    // TODO: Add ThreadUnsafe
-
+    
+    [ThreadUnsafe]
     class ThreadUnsafeObject
     {
-        readonly List<int> list = new List<int>();
+         readonly List<int> list = new List<int>();
 
         public void Add(int x)
         {

@@ -11,6 +11,7 @@ using System;
 using AdvancedMultithreadingLab.ActorModel;
 using AdvancedMultithreadingLab.Benchmarks;
 using AdvancedMultithreadingLab.BlockingCollection;
+using AdvancedMultithreadingLab.Freezable;
 using AdvancedMultithreadingLab.ReaderWriterLock;
 using AdvancedMultithreadingLab.RingBuffer;
 using AdvancedMultithreadingLab.TrivialConcurrentStack;
@@ -22,7 +23,8 @@ namespace AdvancedMultithreadingLab
     {
         private static void Main( string[] args )
         {
-            new TestReaderWriterLock<SynchronizedOrder>().Test();
+            //Freezer.Main();
+           new TestReaderWriterLock<ManuallySynchronizedOrder>().Test();
 
             //MiscBenchmarks.ExecuteAll();
             //new TestConcurrentStack().Start();
