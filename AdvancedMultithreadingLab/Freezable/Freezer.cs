@@ -8,7 +8,7 @@
             icecream.AddIngredient( Ingredient.Milk, 1 );
             icecream.AddIngredient( Ingredient.Sugar, 0.3 );
             icecream.AddIngredient( Ingredient.VanillaFlavour, 0.05 );
-            icecream.Freeze();
+           // icecream.Freeze();
             icecream.AddIngredient(Ingredient.VanillaFlavour, 0.05);
         }
         
