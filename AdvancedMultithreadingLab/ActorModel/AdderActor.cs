@@ -14,7 +14,9 @@ using PostSharp.Patterns.Threading;
 namespace AdvancedMultithreadingLab.ActorModel
 {
 
-    internal sealed class AdderActor : Actor 
+
+    [Actor]
+    internal sealed class AdderActor 
     {
         private int count;
 

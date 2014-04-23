@@ -7,3 +7,4 @@ TestResults
 /AdvancedMultithreadingLab/_ReSharper.AdvancedMultithreadingLab
 *.suo
 /ThreadingTalk.sln.DotSettings.user
+/packages

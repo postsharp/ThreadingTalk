@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.postsharp.org/1.0/configuration">
   <Using File="default" />
-  <Using File="..\packages\PostSharp.Patterns.Threading.3.1.20-beta\tools\PostSharp.Patterns.Threading.Weaver.dll" />
+  <Using File="..\packages\PostSharp.Patterns.Threading.3.2.18-alpha\tools\PostSharp.Patterns.Threading.Weaver.dll" />
 </Project>
