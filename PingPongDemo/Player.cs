@@ -2,14 +2,21 @@
 using System.Threading;
 using System.Threading.Tasks;
 using PostSharp.Patterns.Threading;
+using PostSharp.Patterns.Model;
 
 namespace TestAsync
 {
-    class Player : Actor
+    [Actor]
+    class Player
     {
+        [Reference]
         private readonly ConsoleLogger logger;
+
         readonly string name;
+
+        [Reference] // TODO: weird that it cannot be made a child.
         readonly Random random = new Random();
+        
         private readonly double skills;
 
         private int counter;

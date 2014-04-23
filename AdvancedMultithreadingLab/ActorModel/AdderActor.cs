@@ -13,7 +13,7 @@ using System.Threading;
 namespace AdvancedMultithreadingLab.ActorModel
 {
 
-    // TODO: Derive from Actor
+    // TODO: Add [Actor]
 
     internal sealed class AdderActor 
     {
