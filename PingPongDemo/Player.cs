@@ -36,7 +36,6 @@ namespace TestAsync
 
         public async Task<Player> Ping( Player peer, ConsoleColor color )
         {
-            Console.ForegroundColor = color;
             this.logger.WriteLine( string.Format( "{0}.Ping( color={1} ) from thread {2}", this.name, color, Thread.CurrentThread.ManagedThreadId), color);
 
             if ( random.NextDouble() <= skills )
