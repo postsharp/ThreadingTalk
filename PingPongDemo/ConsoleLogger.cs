@@ -7,7 +7,8 @@ using PostSharp.Patterns.Threading;
 
 namespace TestAsync
 {
-    class ConsoleLogger : Actor
+    [Actor]
+    class ConsoleLogger
     {
         public void WriteLine( string message, ConsoleColor color = ConsoleColor.White )
         {
