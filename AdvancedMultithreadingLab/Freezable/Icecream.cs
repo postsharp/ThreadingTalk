@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PostSharp.Patterns.Threading;
 
 namespace AdvancedMultithreadingLab.Freezable
 {

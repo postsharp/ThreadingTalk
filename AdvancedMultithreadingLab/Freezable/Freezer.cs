@@ -1,4 +1,5 @@
 ﻿using PostSharp;
+using PostSharp.Patterns.Threading;
 
 namespace AdvancedMultithreadingLab.Freezable
 {
@@ -10,7 +11,7 @@ namespace AdvancedMultithreadingLab.Freezable
             icecream.AddIngredient( Ingredient.Milk, 1 );
             icecream.AddIngredient( Ingredient.Sugar, 0.3 );
             icecream.AddIngredient( Ingredient.VanillaFlavour, 0.05 );
-            Post.Cast<Icecream,IFreezable>( icecream ).Freeze();
+            ((IFreezable) icecream).Freeze();
             icecream.AddIngredient(Ingredient.VanillaFlavour, 0.05);
         }
         
