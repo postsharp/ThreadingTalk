@@ -10,7 +10,7 @@ namespace TestAsync
     [Actor]
     class ConsoleLogger
     {
-        public void WriteLine( string message, ConsoleColor color = ConsoleColor.White )
+        public async void WriteLine( string message, ConsoleColor color = ConsoleColor.White )
         {
             Console.ForegroundColor = color;
             Console.WriteLine(message);
