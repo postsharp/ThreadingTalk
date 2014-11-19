@@ -29,11 +29,13 @@ namespace TestAsync
             this.skills = skills;
         }
 
+        [Reentrant]
         public async Task<int> GetCounter()
         {
             return this.counter;
         }
 
+        [Reentrant]
         public async Task<Player> Ping( Player peer, ConsoleColor color )
         {
             this.logger.WriteLine( string.Format( "{0}.Ping( color={1} ) from thread {2}", this.name, color, Thread.CurrentThread.ManagedThreadId), color);

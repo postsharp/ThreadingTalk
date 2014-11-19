@@ -16,6 +16,7 @@ namespace TestAsync
             Console.WriteLine(message);
         }
 
+        [Reentrant]
         public async Task Flush()
         {
             
