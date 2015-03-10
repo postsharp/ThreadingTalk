@@ -8,3 +8,4 @@ TestResults
 /packages
 *.suo
 /ThreadingTalk.sln.DotSettings.user
+/.vs
