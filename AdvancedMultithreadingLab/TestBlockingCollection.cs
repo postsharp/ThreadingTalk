@@ -7,7 +7,7 @@ namespace AdvancedMultithreadingLab
 {
     internal class TestBlockingCollection
     {
-        private const int n = 2000000;
+        private const int n = 5000000;
         private readonly BlockingCollection<int> collection = new BlockingCollection<int>();
 
         public void Start()
