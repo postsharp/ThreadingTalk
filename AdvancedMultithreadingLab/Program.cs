@@ -1,14 +1,5 @@
-﻿#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c) 2012, SharpCrafters s.r.o.
-// All rights reserved.
-// 
-// For licensing terms, see file License.txt
-
-#endregion
-
-using System;
-using AdvancedMultithreadingLab.Benchmarks;
+﻿using System;
+using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
@@ -19,12 +10,13 @@ namespace AdvancedMultithreadingLab
             //Freezer.Main();
           // new TestReaderWriterLock<ManuallySynchronizedOrder>().Test();
 
-            MiscBenchmarks.ExecuteAll();
-            //new TestConcurrentStack().Start();
-            //new TestRingBuffer().Start();
-            //new TestBlockingCollection().Start();
-            //new TestThreadUnsafeObject().Start();
-            //new TestActor().Start();
+            //MiscBenchmarks.ExecuteAll();
+            new TestConcurrentStack().Start();
+            Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
+            new TestRingBuffer().Start();
+            Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
+            new TestBlockingCollection().Start();
+
             //new TestInterlocked().Start();
             
             Console.WriteLine("Done.");

@@ -1,21 +1,12 @@
-#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c) 2012, SharpCrafters s.r.o.
-// All rights reserved.
-// 
-// For licensing terms, see file License.txt
-
-#endregion
-
 using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace AdvancedMultithreadingLab.TrivialConcurrentStack
+namespace AdvancedMultithreadingLab
 {
     internal class TestConcurrentStack
     {
-        private const int n = 20000000;
+        private const int n = 50000000;
         private readonly ConcurrentStack<int> stack = new ConcurrentStack<int>();
 
         public void Start()
@@ -32,6 +23,8 @@ namespace AdvancedMultithreadingLab.TrivialConcurrentStack
 
             threadPush.Join();
             threadPop.Join();
+
+            GC.Collect();
 
             Console.WriteLine( "ConcurrentStack: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
                                1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );

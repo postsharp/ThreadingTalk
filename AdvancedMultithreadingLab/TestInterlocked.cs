@@ -1,18 +1,9 @@
-#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c) 2012, SharpCrafters s.r.o.
-// All rights reserved.
-// 
-// For licensing terms, see file License.txt
-
-#endregion
-
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace AdvancedMultithreadingLab.Benchmarks
+namespace AdvancedMultithreadingLab
 {
     internal class TestInterlocked
     {
@@ -51,9 +42,11 @@ namespace AdvancedMultithreadingLab.Benchmarks
             thread2.Join();
 
             double ns = 1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks);
-            return ns;
+            
             Console.WriteLine("TestInterlocked({2},{3}): {0:0.0} MT/s ({1:0} ns/T)", 1e-6 * n * Stopwatch.Frequency / stopwatch.ElapsedTicks,
                                ns, processorId1, processorId2 );
+
+            return ns;
         }
 
         private void ThreadMain(object state)

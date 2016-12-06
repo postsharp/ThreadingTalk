@@ -1,18 +1,9 @@
-#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c) 2012, SharpCrafters s.r.o.
-// All rights reserved.
-// 
-// For licensing terms, see file License.txt
-
-#endregion
-
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 
-namespace AdvancedMultithreadingLab.BlockingCollection
+namespace AdvancedMultithreadingLab
 {
     internal class TestBlockingCollection
     {
@@ -33,6 +24,8 @@ namespace AdvancedMultithreadingLab.BlockingCollection
 
             threadPush.Join();
             threadPop.Join();
+
+            GC.Collect();
 
             Console.WriteLine( "BlockingCollection: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
                                1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
