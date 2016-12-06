@@ -59,28 +59,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActorModel\AdderActor.cs" />
-    <Compile Include="Benchmarks\MiscBenchmarks.cs" />
-    <Compile Include="Benchmarks\TestInterlocked.cs" />
-    <Compile Include="Freezable\Freezer.cs" />
-    <Compile Include="Freezable\Icecream.cs" />
-    <Compile Include="Freezable\Ingredient.cs" />
-    <Compile Include="ReaderWriterLock\IOrder.cs" />
-    <Compile Include="ReaderWriterLock\ManuallySynchronizedOrder.cs" />
-    <Compile Include="ReaderWriterLock\SynchronizedOrder.cs" />
-    <Compile Include="ReaderWriterLock\TestReaderWriterLock.cs" />
-    <Compile Include="ReaderWriterLock\ThreadUnsafeOrder.cs" />
-    <Compile Include="ThreadUnsafe\TestThreadUnsafeObject.cs" />
-    <Compile Include="ThreadUnsafe\ThreadUnsafeObject.cs" />
-    <Compile Include="TrivialConcurrentStack\ConcurrentStack.cs" />
-    <Compile Include="ActorModel\TestActor.cs" />
-    <Compile Include="BlockingCollection\TestBlockingCollection.cs" />
-    <Compile Include="RingBuffer\TestRingBuffer.cs" />
-    <Compile Include="RingBuffer\PaddedUInt32.cs" />
+    <Compile Include="MiscBenchmarks.cs" />
+    <Compile Include="TestInterlocked.cs" />
+    <Compile Include="ConcurrentStack.cs" />
+    <Compile Include="TestBlockingCollection.cs" />
+    <Compile Include="TestRingBuffer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RingBuffer\RingBuffer.cs" />
-    <Compile Include="TrivialConcurrentStack\TestConcurrentStack.cs" />
+    <Compile Include="RingBuffer.cs" />
+    <Compile Include="TestConcurrentStack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AdvancedMultithreadingLab.psproj" />

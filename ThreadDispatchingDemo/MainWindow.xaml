@@ -1,9 +1,0 @@
-﻿<Window x:Class="ThreadDispatchingDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <WrapPanel Margin="10">
-<ProgressBar Name="progressBar" Width="200" Maximum="100"/>
-<Button Name="startButton" Margin="5 0 0 0"  Click="startButton_Click">Start</Button>
-</WrapPanel>
-</Window>

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace AdvancedMultithreadingLab.Benchmarks
+namespace AdvancedMultithreadingLab
 {
     class MiscBenchmarks
     {

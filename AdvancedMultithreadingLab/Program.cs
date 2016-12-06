@@ -8,14 +8,7 @@
 #endregion
 
 using System;
-using AdvancedMultithreadingLab.ActorModel;
 using AdvancedMultithreadingLab.Benchmarks;
-using AdvancedMultithreadingLab.BlockingCollection;
-using AdvancedMultithreadingLab.Freezable;
-using AdvancedMultithreadingLab.ReaderWriterLock;
-using AdvancedMultithreadingLab.RingBuffer;
-using AdvancedMultithreadingLab.TrivialConcurrentStack;
-using AdvancedMultithreadingLab.ThreadUnsafe;
 
 namespace AdvancedMultithreadingLab
 {
@@ -24,9 +17,9 @@ namespace AdvancedMultithreadingLab
         private static void Main( string[] args )
         {
             //Freezer.Main();
-           new TestReaderWriterLock<ManuallySynchronizedOrder>().Test();
+          // new TestReaderWriterLock<ManuallySynchronizedOrder>().Test();
 
-            //MiscBenchmarks.ExecuteAll();
+            MiscBenchmarks.ExecuteAll();
             //new TestConcurrentStack().Start();
             //new TestRingBuffer().Start();
             //new TestBlockingCollection().Start();
