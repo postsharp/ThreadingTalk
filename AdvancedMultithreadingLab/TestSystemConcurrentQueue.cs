@@ -5,49 +5,26 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestSystemConcurrentQueue
+    internal class TestSystemConcurrentQueue : TestCollectionBase
     {
-        private const int n = 50000000;
-        private readonly ConcurrentQueue<int> stack = new ConcurrentQueue<int>();
+        private readonly ConcurrentQueue<int> queue = new ConcurrentQueue<int>();
 
-        public void Start()
+        protected override void AddItems( int count )
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
-            Thread threadPush = new Thread( this.ThreadPush );
-            Thread threadPop = new Thread( this.ThreadPop );
-
-            stopwatch.Start();
-
-            threadPush.Start();
-            threadPop.Start();
-
-            threadPush.Join();
-            threadPop.Join();
-
-            GC.Collect();
-
-            Console.WriteLine( "SystemConcurrentQueue: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
-                               1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
-        }
-
-        private void ThreadPush()
-        {
-            for ( int i = 0; i < n; i++ )
+            for ( int i = 0; i < count; i++ )
             {
-                this.stack.Enqueue( i );
+                this.queue.Enqueue( i );
             }
         }
 
-        private void ThreadPop()
+        protected override void ConsumeItems( int count )
         {
             SpinWait spinWait = new SpinWait();
-
             int value;
 
-            for ( int i = 0; i < n; )
+            for ( int i = 0; i < count; )
             {
-                if ( this.stack.TryDequeue( out value ) )
+                if ( this.queue.TryDequeue( out value ) )
                 {
                     i++;
 
@@ -58,11 +35,7 @@ namespace AdvancedMultithreadingLab
                     spinWait.SpinOnce();
                 }
             }
-
-            if ( this.stack.TryDequeue( out value ))
-            {
-                throw new Exception( "Data structure corrupted." );
-            }
         }
+
     }
 }

@@ -5,47 +5,27 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestBlockingCollection
+    internal class TestBlockingCollection : TestCollectionBase
     {
-        private const int n = 5000000;
         private readonly BlockingCollection<int> collection = new BlockingCollection<int>();
 
-        public void Start()
+        protected override void AddItems( int count )
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
-            Thread threadPush = new Thread( this.ThreadPush );
-            Thread threadPop = new Thread( this.ThreadPop );
-
-            stopwatch.Start();
-
-            threadPush.Start();
-            threadPop.Start();
-
-            threadPush.Join();
-            threadPop.Join();
-
-            GC.Collect();
-
-            Console.WriteLine( "BlockingCollection: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
-                               1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
-        }
-
-        private void ThreadPush()
-        {
-            for ( int i = 0; i < n; i++ )
+            for ( int i = 0; i < count; i++ )
             {
                 this.collection.Add( i );
             }
-            this.collection.CompleteAdding();
         }
 
-        private void ThreadPop()
+        protected override void ConsumeItems( int count )
         {
-            foreach (int i in this.collection.GetConsumingEnumerable())
+            var enumerator = this.collection.GetConsumingEnumerable().GetEnumerator();
+            for ( int i = 0; i < count; i++ )
             {
-
+                enumerator.MoveNext();    
             }
+            
         }
+        
     }
 }
