@@ -1,13 +1,14 @@
 using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestRingBuffer
+    internal class TestSystemConcurrentQueue
     {
         private const int n = 50000000;
-        private readonly RingBuffer<int> buffer = new RingBuffer<int>( 1024*64 );
+        private readonly ConcurrentQueue<int> stack = new ConcurrentQueue<int>();
 
         public void Start()
         {
@@ -26,7 +27,7 @@ namespace AdvancedMultithreadingLab
 
             GC.Collect();
 
-            Console.WriteLine( "RingBuffer: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
+            Console.WriteLine( "SystemConcurrentQueue: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
                                1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
         }
 
@@ -34,19 +35,33 @@ namespace AdvancedMultithreadingLab
         {
             for ( int i = 0; i < n; i++ )
             {
-                while ( !this.buffer.TryAdd( i ) )
-                {
-                }
+                this.stack.Enqueue( i );
             }
         }
 
         private void ThreadPop()
         {
+            SpinWait spinWait = new SpinWait();
+
+            int value;
+
             for ( int i = 0; i < n; )
             {
-                int value;
-                if ( this.buffer.TryTake( out value ) )
+                if ( this.stack.TryDequeue( out value ) )
+                {
                     i++;
+
+                    spinWait.Reset();
+                }
+                else
+                {
+                    spinWait.SpinOnce();
+                }
+            }
+
+            if ( this.stack.TryDequeue( out value ))
+            {
+                throw new Exception( "Data structure corrupted." );
             }
         }
     }

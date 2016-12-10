@@ -52,14 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MiscBenchmarks.cs" />
+    <Compile Include="TestSystemConcurrentBag.cs" />
+    <Compile Include="TestSystemConcurrentQueue.cs" />
+    <Compile Include="TestTrivialConcurrentStack.cs" />
     <Compile Include="TestInterlocked.cs" />
-    <Compile Include="ConcurrentStack.cs" />
+    <Compile Include="TrivialConcurrentStack.cs" />
     <Compile Include="TestBlockingCollection.cs" />
-    <Compile Include="TestRingBuffer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RingBuffer.cs" />
-    <Compile Include="TestConcurrentStack.cs" />
+    <Compile Include="TestSystemConcurrentStack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,14 +7,22 @@ namespace AdvancedMultithreadingLab
     {
         private static void Main( string[] args )
         {
-            //Freezer.Main();
-          // new TestReaderWriterLock<ManuallySynchronizedOrder>().Test();
 
             //MiscBenchmarks.ExecuteAll();
-            new TestConcurrentStack().Start();
+
+            new TestTrivialConcurrentStack().Start();
             Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
-            new TestRingBuffer().Start();
+
+            new TestSystemConcurrentStack().Start();
             Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
+
+            new TestSystemConcurrentQueue().Start();
+            Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
+
+            new TestSystemConcurrentBag().Start();
+            Thread.Sleep( 5000 ); // Separate peaks in CPU monitor.
+
+
             new TestBlockingCollection().Start();
 
             //new TestInterlocked().Start();

@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestConcurrentStack
+    internal class TestSystemConcurrentStack
     {
         private const int n = 50000000;
         private readonly ConcurrentStack<int> stack = new ConcurrentStack<int>();
@@ -26,7 +27,7 @@ namespace AdvancedMultithreadingLab
 
             GC.Collect();
 
-            Console.WriteLine( "ConcurrentStack: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
+            Console.WriteLine( "SystemConcurrentStack: {0:0.0} MT/s ({1:0} ns/T)", 1e-6*n*Stopwatch.Frequency/stopwatch.ElapsedTicks,
                                1e9/((double) n*Stopwatch.Frequency/stopwatch.ElapsedTicks) );
         }
 
@@ -40,11 +41,27 @@ namespace AdvancedMultithreadingLab
 
         private void ThreadPop()
         {
+            SpinWait spinWait = new SpinWait();
+
+            int value;
+
             for ( int i = 0; i < n; )
             {
-                int value;
                 if ( this.stack.TryPop( out value ) )
+                {
                     i++;
+
+                    spinWait.Reset();
+                }
+                else
+                {
+                    spinWait.SpinOnce();
+                }
+            }
+
+            if ( this.stack.TryPop( out value ))
+            {
+                throw new Exception( "Data structure corrupted." );
             }
         }
     }

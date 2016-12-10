@@ -2,12 +2,14 @@
 
 namespace AdvancedMultithreadingLab
 {
-    internal sealed class ConcurrentStack<T>
+    internal sealed class TrivialConcurrentStack<T>
     {
-        private Node head;
+        private volatile Node head;
 
         public void Push( T value )
         {
+            SpinWait wait = new SpinWait();
+
             Node node = new Node {Value = value};
 
             for ( ;; )
@@ -17,11 +19,15 @@ namespace AdvancedMultithreadingLab
 
                 if ( Interlocked.CompareExchange( ref this.head, node, localHead ) == localHead )
                     return;
+
+                wait.SpinOnce();
             }
         }
 
         public bool TryPop( out T value )
         {
+            SpinWait wait = new SpinWait();
+
             for ( ;; )
             {
                 Node localHead = this.head;
@@ -37,6 +43,9 @@ namespace AdvancedMultithreadingLab
                     value = localHead.Value;
                     return true;
                 }
+
+                wait.SpinOnce();
+
             }
         }
 
