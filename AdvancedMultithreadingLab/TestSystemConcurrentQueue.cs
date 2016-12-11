@@ -5,9 +5,11 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestSystemConcurrentQueue : TestCollectionBase
+    public class TestSystemConcurrentQueue : TestCollectionBase
     {
         private readonly ConcurrentQueue<int> queue = new ConcurrentQueue<int>();
+
+   
 
         protected override void AddItems( int count )
         {

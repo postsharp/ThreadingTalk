@@ -1,21 +1,20 @@
 using System;
-using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    public class TestSystemConcurrentBag : TestCollectionBase
+    public class TestMyConcurrentStack : TestCollectionBase
     {
-        private readonly ConcurrentBag<int> bag = new ConcurrentBag<int>();
-
+        private readonly MyConcurrentStack<int> stack = new MyConcurrentStack<int>();
 
       
+
         protected override void AddItems( int count )
         {
-            for ( int i = 0; i < count; i++ )
+            for ( int i = 0; i < count; i++)
             {
-                this.bag.Add( i );
+                this.stack.Push( i );
             }
         }
 
@@ -26,7 +25,7 @@ namespace AdvancedMultithreadingLab
 
             for ( int i = 0; i < count; )
             {
-                if ( this.bag.TryTake( out value ) )
+                if ( this.stack.TryPop( out value ) )
                 {
                     i++;
 

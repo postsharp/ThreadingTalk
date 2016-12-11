@@ -5,17 +5,17 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    public class TestSystemConcurrentBag : TestCollectionBase
+    public class TestMyConcurrentQueue : TestCollectionBase
     {
-        private readonly ConcurrentBag<int> bag = new ConcurrentBag<int>();
+        private readonly MyConcurrentQueue<int> queue = new MyConcurrentQueue<int>();
 
+   
 
-      
         protected override void AddItems( int count )
         {
             for ( int i = 0; i < count; i++ )
             {
-                this.bag.Add( i );
+                this.queue.Enqueue( i );
             }
         }
 
@@ -26,7 +26,7 @@ namespace AdvancedMultithreadingLab
 
             for ( int i = 0; i < count; )
             {
-                if ( this.bag.TryTake( out value ) )
+                if ( this.queue.TryDequeue( out value ) )
                 {
                     i++;
 
@@ -37,6 +37,7 @@ namespace AdvancedMultithreadingLab
                     spinWait.SpinOnce();
                 }
             }
+
         }
 
     }

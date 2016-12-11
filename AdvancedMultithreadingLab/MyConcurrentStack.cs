@@ -2,7 +2,7 @@
 
 namespace AdvancedMultithreadingLab
 {
-    internal sealed class TrivialConcurrentStack<T>
+    internal sealed class MyConcurrentStack<T>
     {
         private volatile Node head;
 

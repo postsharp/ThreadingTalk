@@ -5,9 +5,10 @@ using System.Threading;
 
 namespace AdvancedMultithreadingLab
 {
-    internal class TestBlockingCollection : TestCollectionBase
+    public class TestBlockingCollection : TestCollectionBase
     {
         private readonly BlockingCollection<int> collection = new BlockingCollection<int>();
+
 
         protected override void AddItems( int count )
         {
